@@ -1,6 +1,42 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const location = useLocation();
+
+  // Close mobile nav on route change
+  useEffect(() => {
+    setIsNavOpen(false);
+    setIsDropdownOpen(false);
+  }, [location]);
+
+  // Handle sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 35) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const getNavLinkClass = (path: string) => {
+    return location.pathname === path ? 'nav-item nav-link active' : 'nav-item nav-link';
+  };
+  
+  const getPagesLinkClass = () => {
+    return ['/blog', '/single'].includes(location.pathname) ? 'nav-link dropdown-toggle active' : 'nav-link dropdown-toggle';
+  }
+
   return (
     <>
       <div className="top-bar d-none d-md-block">
@@ -10,11 +46,13 @@ const Header = () => {
               <div className="top-bar-left">
                 <div className="text">
                   <i className="far fa-clock"></i>
-                  <h2>info@qvalfocus.com</h2>
+                  <h2>8:00 - 9:00</h2>
+                  <p>Mon - Fri</p>
                 </div>
                 <div className="text">
                   <i className="fa fa-phone-alt"></i>
-                  <h2>+1(609) 701 - 9988</h2>
+                  <h2>+123 456 7890</h2>
+                  <p>For Appointment</p>
                 </div>
               </div>
             </div>
@@ -32,31 +70,31 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div className={`navbar navbar-expand-lg bg-dark navbar-dark ${isSticky ? 'nav-sticky' : ''}`}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <img src="/img/qvalfocus.png" alt="Qvalfocus Logo" />
           </Link>
-          <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <button type="button" className="navbar-toggler" onClick={() => setIsNavOpen(!isNavOpen)}>
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+          <div className={`collapse navbar-collapse justify-content-between ${isNavOpen ? 'show' : ''}`} id="navbarCollapse">
             <div className="navbar-nav ml-auto">
-              <Link to="/" className="nav-item nav-link">Home</Link>
-              <Link to="/about" className="nav-item nav-link">About</Link>
-              <Link to="/service" className="nav-item nav-link">Service</Link>
-              <Link to="/feature" className="nav-item nav-link">Feature</Link>
-              <Link to="/advisor" className="nav-item nav-link">Advisor</Link>
-              <Link to="/review" className="nav-item nav-link">Review</Link>
-              <div className="nav-item dropdown">
-                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                <div className="dropdown-menu">
+              <Link to="/" className={getNavLinkClass('/')}>Home</Link>
+              <Link to="/about" className={getNavLinkClass('/about')}>About</Link>
+              <Link to="/service" className={getNavLinkClass('/service')}>Service</Link>
+              <Link to="/feature" className={getNavLinkClass('/feature')}>Feature</Link>
+              <Link to="/advisor" className={getNavLinkClass('/advisor')}>Advisor</Link>
+              <Link to="/review" className={getNavLinkClass('/review')}>Review</Link>
+              <div className={`nav-item dropdown ${isDropdownOpen ? 'show' : ''}`}>
+                <a href="#" className={getPagesLinkClass()} onClick={(e) => { e.preventDefault(); setIsDropdownOpen(!isDropdownOpen);}}>Pages</a>
+                <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
                   <Link to="/blog" className="dropdown-item">Blog Page</Link>
                   <Link to="/single" className="dropdown-item">Single Page</Link>
                 </div>
               </div>
-              <Link to="/contact" className="nav-item nav-link">Contact</Link>
+              <Link to="/contact" className={getNavLinkClass('/contact')}>Contact</Link>
             </div>
           </div>
         </div>
