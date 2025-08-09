@@ -86,25 +86,29 @@ const Feature = () => {
       <div className="testimonial">
         <div className="container">
           <div className="section-header">
-            <p>Testimonial Carousel</p>
+            <p>Testimonial</p>
             <h2>100% Positive Customer Reviews</h2>
           </div>
-          <div className="owl-carousel testimonials-carousel">
-            <div className="testimonial-item">
-              <img src="/img/testimonial-1.jpg" alt="Image" />
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat
-              </p>
-              <h2>Client Name</h2>
-              <h3>Profession</h3>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="testimonial-item">
+                <img src="/img/testimonial-1.jpg" alt="Image" />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat
+                </p>
+                <h2>Client Name</h2>
+                <h3>Profession</h3>
+              </div>
             </div>
-            <div className="testimonial-item">
-              <img src="/img/testimonial-2.jpg" alt="Image" />
-              <p>
-                Phasellus pellentesque tempus pretium. Quisque in enim sit amet purus venenatis porttitor sed non velit. Vivamus vehicula finibus
-              </p>
-              <h2>Client Name</h2>
-              <h3>Profession</h3>
+            <div className="col-md-6">
+              <div className="testimonial-item">
+                <img src="/img/testimonial-2.jpg" alt="Image" />
+                <p>
+                  Phasellus pellentesque tempus pretium. Quisque in enim sit amet purus venenatis porttitor sed non velit. Vivamus vehicula finibus
+                </p>
+                <h2>Client Name</h2>
+                <h3>Profession</h3>
+              </div>
             </div>
           </div>
         </div>

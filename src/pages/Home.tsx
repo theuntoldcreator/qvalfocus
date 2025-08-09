@@ -3,17 +3,15 @@ const Home = () => {
     <>
       <div className="carousel">
         <div className="container-fluid">
-          <div className="owl-carousel">
-            <div className="carousel-item active">
-              <div className="carousel-img">
-                <img src="/img/carousel-1.jpg" alt="Carousel Image" />
-              </div>
-              <div className="carousel-text">
-                <h1>Fast & Trusted Consulting Service</h1>
-                <p>
-                  Pioneering solutions in Life Sciences and IT, we connect top-tier talent with leading organizations to drive innovation and success.
-                </p>
-              </div>
+          <div className="carousel-item active">
+            <div className="carousel-img">
+              <img src="/img/carousel-1.jpg" alt="Carousel Image" />
+            </div>
+            <div className="carousel-text">
+              <h1>Fast & Trusted Consulting Service</h1>
+              <p>
+                Pioneering solutions in Life Sciences and IT, we connect top-tier talent with leading organizations to drive innovation and success.
+              </p>
             </div>
           </div>
         </div>
@@ -256,17 +254,29 @@ const Home = () => {
       <div className="testimonial">
         <div className="container">
           <div className="section-header">
-            <p>Testimonial Carousel</p>
+            <p>Testimonial</p>
             <h2>100% Positive Customer Reviews</h2>
           </div>
-          <div className="owl-carousel testimonials-carousel">
-            <div className="testimonial-item">
-              <img src="/img/testimonial-1.jpg" alt="Image" />
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat
-              </p>
-              <h2>Client Name</h2>
-              <h3>Profession</h3>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="testimonial-item">
+                <img src="/img/testimonial-1.jpg" alt="Image" />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat
+                </p>
+                <h2>Client Name</h2>
+                <h3>Profession</h3>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="testimonial-item">
+                <img src="/img/testimonial-2.jpg" alt="Image" />
+                <p>
+                  Phasellus pellentesque tempus pretium. Quisque in enim sit amet purus venenatis porttitor sed non velit. Vivamus vehicula finibus
+                </p>
+                <h2>Client Name</h2>
+                <h3>Profession</h3>
+              </div>
             </div>
           </div>
         </div>
