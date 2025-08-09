@@ -4,43 +4,46 @@ This document outlines the technology stack and development rules for this web a
 
 ## Tech Stack
 
-This is a static website built with the following technologies:
+This is a modern single-page application (SPA) built with the following technologies:
 
-*   **HTML5:** The core markup language for the site structure.
-*   **CSS3:** Used for custom styling, located in `css/style.css`.
-*   **Bootstrap 4:** The primary CSS framework for layout, components, and responsive design.
-*   **jQuery:** The main JavaScript library for DOM manipulation, event handling, and AJAX.
-*   **Font Awesome:** Used for all icons throughout the application.
-*   **Owl Carousel:** The designated library for creating carousels and sliders.
-*   **Animate.css:** Used for CSS animations on various elements.
-*   **Waypoints.js & Counter-Up.js:** Used for triggering animations and counting numbers on scroll.
-*   **jqBootstrapValidation.js:** Used for client-side form validation.
+*   **Vite:** The build tool and development server.
+*   **React 18:** The core UI library for building components.
+*   **TypeScript:** For static typing to ensure code quality and maintainability.
+*   **React Router DOM:** The library for handling client-side routing and navigation.
+*   **Tailwind CSS (Optional):** Can be used for utility-first styling to complement the existing CSS.
+*   **ESLint & Prettier:** For code linting and formatting.
 
 ## Development Rules
 
-1.  **Styling:**
-    *   Utilize Bootstrap classes for layout and components whenever possible.
-    *   All custom styles should be added to `css/style.css`. Do not create new CSS files.
+1.  **Component-Based Architecture:**
+    *   All UI should be broken down into small, reusable components located in `src/components`.
+    *   Pages, which are compositions of components, will reside in `src/pages`.
+    *   Components should be functional components using React Hooks (`useState`, `useEffect`, etc.).
 
-2.  **JavaScript:**
-    *   Use jQuery for all JavaScript interactions, including DOM manipulation, event handling, and animations.
-    *   Custom JavaScript logic should be placed in `js/main.js`.
+2.  **Styling:**
+    *   Global styles from the original site are located in `src/index.css`.
+    *   Utilize responsive design principles, preferably mobile-first.
+    *   Avoid using jQuery for any DOM manipulation or styling; use React's state and props to conditionally apply classes.
 
-3.  **Icons:**
-    *   Only use icons from the Font Awesome library. The syntax is typically `<i class="fa fa-icon-name"></i>` or `<i class="fab fa-icon-name"></i>`.
+3.  **JavaScript/TypeScript:**
+    *   **No jQuery.** All DOM manipulation and event handling must be done the "React way" using state, props, and event handlers.
+    *   **Strict TypeScript.** The `tsconfig.json` is set to `strict: true`. Avoid using the `any` type. Define clear interfaces and types for all props, state, and API data.
 
-4.  **Carousels/Sliders:**
-    *   Implement all new carousels using the Owl Carousel plugin. Its initialization and configuration can be found in `js/main.js`.
+4.  **Routing:**
+    *   All navigation must be handled by `react-router-dom`.
+    *   Use the `<Link>` component for internal navigation instead of `<a>` tags to prevent full-page reloads.
+    *   The main routing configuration is in `src/routes/AppRoutes.tsx`.
 
-5.  **Animations:**
-    *   For element animations, use the classes provided by `animate.css`.
-    *   For scroll-triggered animations, use the Waypoints library.
+5.  **File Structure:**
+    *   Adhere to the established file structure (`src/components`, `src/pages`, `src/routes`, etc.).
+    *   Directory names must be all lower-case. Component file names should use PascalCase (e.g., `Header.tsx`).
 
-6.  **Forms:**
-    *   All forms must use the `jqBootstrapValidation.js` plugin for client-side validation. The implementation logic is in `mail/contact.js`.
+6.  **Dependencies:**
+    *   All third-party packages must be managed through `package.json`. Do not add libraries via CDN links in `index.html`.
 
-7.  **File Structure:**
-    *   Do not alter the existing file structure. Keep HTML files in the root, CSS in `/css`, JavaScript in `/js`, and third-party libraries in `/lib`.
+7.  **Forms:**
+    *   All forms must be implemented as controlled components using React state.
+    *   Client-side validation should be performed before submitting data.
 
-8.  **Dependencies:**
-    *   All necessary third-party libraries are already included in the project. Do not add new external libraries or use package managers like npm.
+8.  **Assets:**
+    *   Static assets like images, icons, and fonts are located in the `/public` directory.
